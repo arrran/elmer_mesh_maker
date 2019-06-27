@@ -6,7 +6,7 @@ See jupyter notebook tutorial.
 
 Process summary:
 1. msh = mesh()
-2. msh.load_perimeter(perimeter_file)
+2. msh.load_perimeter(perimeter_filename)
 3. msh.set_resolutions(list_of_resolutions)
 4. msh.make_perimeters_newres()
 5. msh.make_meshes()
