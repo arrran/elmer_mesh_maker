@@ -2,7 +2,7 @@
 
 This module makes 2D meshes of different resolutions for ElmerIce, with customised labeled boundaries. ElmerIce will extrude the mesh into 3D.
 
-See jupyter notebook tutorial.
+**See jupyter notebook tutorial.**
 
 Process summary:
 1. msh = mesh()
