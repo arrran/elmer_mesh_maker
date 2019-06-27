@@ -154,6 +154,7 @@ class mesh:
             output_filename = input_root +"_"+ str(distance)
             mesh = pygmsh.generate_mesh(geom,verbose=False,dim=2,geo_filename=output_filename+".geo",mesh_file_type=mesh_file_type)
             self.output_filenames.append(output_filename)
+            
             # write the mesh to gmsh msh format using meshio
             meshio.write_points_cells(
                 output_filename+"."+mesh_file_type,
@@ -164,8 +165,18 @@ class mesh:
                 field_data=mesh.field_data,
                 file_format='gmsh2-ascii'
                 )
+            
+            # write the mesh to vtu for viewing in paraview
+            meshio.write_points_cells(
+                output_filename+".vtu",
+                mesh.points,
+                mesh.cells,
+                point_data=mesh.point_data,
+                cell_data=mesh.cell_data,
+                field_data=mesh.field_data
+                )
    
-            print(input_root+" written as "+output_filename+".geo and "+output_filename+".msh")
+            print(input_root+" written as "+output_filename+".geo and "+output_filename+".msh and "+output_filename+".vtu")
         return 
 
 
