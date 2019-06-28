@@ -238,17 +238,29 @@ class mesh:
     def find_corners(self,indicies):
         
         plt.plot(self.perimeter.xy[0],self.perimeter.xy[1])
-        plt.plot(self.perimeter.xy[0][indicies[0]],self.perimeter.xy[1][indicies[0]],'ro')
-        plt.plot(self.perimeter.xy[0][indicies[1]],self.perimeter.xy[1][indicies[1]],'go')
-        plt.plot(self.perimeter.xy[0][indicies[2]],self.perimeter.xy[1][indicies[2]],'o',color='orange')
-        plt.plot(self.perimeter.xy[0][indicies[3]],self.perimeter.xy[1][indicies[3]],'bo')
-        plt.grid()
-        print("Perimeter has {} points.".format(self.num_points))
-        print("Red dot is at {}. Green at {}. Orange at {}. Blue at {}.".format(self.perimeter.coords[indicies[0]]\
-              ,self.perimeter.coords[indicies[1]],self.perimeter.coords[indicies[2]],self.perimeter.coords[indicies[3]]))
-                
-        self.found_corners = [self.perimeter.coords[indicies[0]]\
-              ,self.perimeter.coords[indicies[1]],self.perimeter.coords[indicies[2]],self.perimeter.coords[indicies[3]]]
+        
+        if len(indicies)==4:
+            plt.plot(self.perimeter.xy[0][indicies[0]],self.perimeter.xy[1][indicies[0]],'ro')
+            plt.plot(self.perimeter.xy[0][indicies[1]],self.perimeter.xy[1][indicies[1]],'go')
+            plt.plot(self.perimeter.xy[0][indicies[2]],self.perimeter.xy[1][indicies[2]],'o',color='orange')
+            plt.plot(self.perimeter.xy[0][indicies[3]],self.perimeter.xy[1][indicies[3]],'bo')
+            plt.grid()
+            print("Perimeter has {} points.".format(self.num_points))
+            print("Red dot is at {}. Green at {}. Orange at {}. Blue at {}.".format(self.perimeter.coords[indicies[0]]\
+                  ,self.perimeter.coords[indicies[1]],self.perimeter.coords[indicies[2]],self.perimeter.coords[indicies[3]]))
+                    
+            self.found_corners = [self.perimeter.coords[indicies[0]]\
+                  ,self.perimeter.coords[indicies[1]],self.perimeter.coords[indicies[2]],self.perimeter.coords[indicies[3]]]
+        else:
+            cmap=plt.get_cmap('jet',self.num_points)
+            self.found_corners = []
+            for index in indicies:
+                plt.plot(self.perimeter.xy[0][index],self.perimeter.xy[1][index],'o',color=cmap(index/self.num_points),label=str(index))
+                self.found_corners.append(self.perimeter.coords[index])
+            plt.legend()
+            print("Perimeter has {} points.".format(self.num_points))
+            print("Each index provided corresponds to a coloured point, shown in the legend")
+            
         self.found_corner_indicies = indicies
         
     
@@ -371,30 +383,18 @@ class mesh:
 
 
 
-
-#
-#
-#
-#
-#
-#
-#
-#os.chdir('/Users/home/whitefar/PROJECTS/KAMB_ELMER_GLADS/tests/mesh_class/')
-#
-#perimeter_file = 'line.shp'
-#perimeter_file = 'poly.shp'
-#perimeter_file = '2017_perimeter_s3_20m_chain.shp'
-#msh = mesh()
-#msh.load_perimeter(perimeter_file)
-#msh.set_resolutions([10000,20000,30000])
-#msh.make_perimeters_newres()
-#msh.plot(1)
+perimeter_file = 'example_perimeter/brewster.shp'
+msh = mesh()
+msh.load_perimeter(perimeter_file)
+msh.set_resolutions([100,200])
+msh.make_perimeters_newres()
+msh.plot(1)
 #msh.perimeters_newres[2]
-#msh.make_meshes()
-##msh.export("all")  
-#msh.print_elmergrid_command()
-##msh.run_all()
-#msh.find_corners([1,6,14,18])
-#msh.set_corners()
-#msh.label_boundaries()
+msh.make_meshes()
+
+msh.print_elmergrid_command()
+#msh.run_all()
+msh.find_corners([100,200,300,400,500])
+msh.set_corners()
+msh.label_boundaries([1,2,3,4,5])
         
