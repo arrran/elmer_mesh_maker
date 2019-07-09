@@ -383,18 +383,18 @@ class mesh:
 
 
 
-perimeter_file = 'example_perimeter/brewster.shp'
-msh = mesh()
-msh.load_perimeter(perimeter_file)
-msh.set_resolutions([100,200])
-msh.make_perimeters_newres()
-msh.plot(1)
-#msh.perimeters_newres[2]
-msh.make_meshes()
+# perimeter_file = 'example_perimeter/brewster.shp'
+# msh = mesh()
+# msh.load_perimeter(perimeter_file)
+# msh.set_resolutions([100,200])
+# msh.make_perimeters_newres()
+# msh.plot(1)
+# #msh.perimeters_newres[2]
+# msh.make_meshes()
 
-msh.print_elmergrid_command()
-#msh.run_all()
-msh.find_corners([100,200,300,400,500])
-msh.set_corners()
-msh.label_boundaries([1,2,3,4,5])
+# msh.print_elmergrid_command()
+# #msh.run_all()
+# msh.find_corners([100,200,300,400,500])
+# msh.set_corners()
+# msh.label_boundaries([1,2,3,4,5])
         
